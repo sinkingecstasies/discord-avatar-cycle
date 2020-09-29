@@ -46,7 +46,7 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 | Command name | Alias | Description | Usage |
 | ------ | ------ | ------ | ------ |
 | append | append / add | Appends an anther avatar into json, please use direct image url only. Accepts bulk links, separate them by space | !!!append \<link1\> \<link2\> ... |
-| config | config / setting / settings | Changes configuration files. Available options are config and interval, config setting only accepts either `cycle` or `random`, interval only accepts time format in 0d0h0m0n0s | !!!config \<cycle|interval\> \<setting\> |
+| config | config / setting / settings | Changes configuration files. Available options are config and interval, config setting only accepts either `cycle` or `random`, interval only accepts time format in 0d0h0m0s, for example: 1d6h for  1 day and 6 hours | !!!config \<cycle|interval\> \<setting\> |
 | jump | jump / jumpto / skipto | Change avatar to specified index on list | !!!jump \<index\> |
 | list | list / avatars | Show list of all links inside pfp.json | !!!list |
 | remove | remove / rem / r  | Remove a specific url inside json by using their index number shown on 'list' command. Accepts `l`/`latest` as an argumet, also accepts bulk delete | !!!remove \<index1\> \<index2\> ... |
