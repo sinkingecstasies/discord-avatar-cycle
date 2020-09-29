@@ -53,4 +53,6 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 ## Notes
 If the bot doesn't change avatar, that's probably because you hit the ratelimit or url is invalid
 
+For whatever reason, user accounts are required to use password, bot accounts doesn't require password though
+
 Not recommended if you're hosting the bot on [heroku](https://www.heroku.com/) due to [ephemeral file system](https://devcenter.heroku.com/articles/how-heroku-works#dyno-manager)
