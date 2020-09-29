@@ -1,6 +1,7 @@
 # Before you start
 Discord selfbot are against ToS, using any selfbot will likely get your account banned. I'm not responsible for any problem caused by this.
-**Use it at your own risk**
+
+**Use this at your own risk**
 
 The selfbot is here just either for fun or for education purposes
 
