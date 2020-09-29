@@ -22,7 +22,13 @@ Pretty sure it's compatible with most VPS like [galaxygate](https://www.galaxyga
 
 Or free ones like [heroku](https://www.heroku.com/), [repl.it](https://repl.it/) (there are not really good but it's your choice).
 
-There also fork ready [repl.it project](https://repl.it/@Tris07/Avatar-cycle), all you have to do is set up [.env](https://docs.repl.it/repls/secret-keys) to store your credentials
+# repl.it
+There also [repl.it project](https://repl.it/@Tris07/Avatar-cycle), all you have to do is set up [.env](https://docs.repl.it/repls/secret-keys) to store your credentials.
+It should look like this:
+```
+TOKEN=<your_token>
+PASSWORD=<your_password>
+```
 
 ## Features
 - This bot will changes your discord avatar with custom interval, so you could set it for like daily, hourly, etc.
