@@ -20,7 +20,7 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 # Hosting
 Pretty sure it's compatible with most VPS like [galaxygate](https://www.galaxygate.net/), [linode](https://www.linode.com/), or [vultr](https://www.vultr.com/) for like 3/5$.
 
-Or free ones like [heroku](https://www.heroku.com/), [repl.it](https://repl.it/) (there are not really good but it's your choice).
+Or free ones like [heroku](https://www.heroku.com/), [repl.it](https://repl.it/) (these are not really good but it's your choice).
 
 # repl.it
 There also [repl.it project](https://repl.it/@Tris07/Avatar-cycle), all you have to do is set up [.env](https://docs.repl.it/repls/secret-keys) to store your credentials.
