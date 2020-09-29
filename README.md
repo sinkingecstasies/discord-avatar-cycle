@@ -12,7 +12,18 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 - [aiohttp](https://pypi.org/project/aiohttp/)
 - [humanize](https://pypi.org/project/humanize/), not really necesarry, it's only used to convert interval seconds into human readable time and nothing else
 
-# Features
+# Setup
+- All you have to do is just set up configuration files inside config folder, you need to put your token, password, avatar links and you're good to go
+- Run main.py. You can use any IDE, or run straight from command prompt by doing `python main.py` at the current folder
+
+# Hosting
+Pretty sure it's compatible with most VPS like [galaxygate](https://www.galaxygate.net/), [linode](https://www.linode.com/), or [vultr](https://www.vultr.com/) for like 3/5$.
+
+Or free ones like [heroku](https://www.heroku.com/), [repl.it](https://repl.it/) (there are not really good but it's your choice).
+
+There also fork ready [repl.it project](https://repl.it/@Tris07/Avatar-cycle), all you have to do is set up [.env](https://docs.repl.it/repls/secret-keys) to store your credentials
+
+## Features
 - This bot will changes your discord avatar with custom interval, so you could set it for like daily, hourly, etc.
 - You can also append, change configuration/avatar files straight from commands or edit them manually
 - This bot has 2 cycle style, random and cycle
