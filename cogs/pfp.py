@@ -313,7 +313,7 @@ class avatar_rotator(cog):
         # It need to wait for some time to connect it, without this bot.user will always return None
         if self.bot.variables_first_run == True:
             await asyncio.sleep(15)
-            self.bot.variables_first_run = True
+            self.bot.variables_first_run = False
 
         def get_password():
             with open('config/password', 'r') as f:
