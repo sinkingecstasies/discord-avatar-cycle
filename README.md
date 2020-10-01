@@ -10,6 +10,8 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 
 ## Requirements
 - Latest [python](https://www.python.org/) version
+
+- [discord.py](https://github.com/Rapptz/discord.py)
 - [aiohttp](https://pypi.org/project/aiohttp/)
 - [humanize](https://pypi.org/project/humanize/), not really necesarry, it's only used to convert interval seconds into human readable time and nothing else
 
