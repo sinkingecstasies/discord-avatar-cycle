@@ -63,9 +63,14 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 ### 18 October 2020
 - Added new command `!!!steal`/`!!!copy`
 - Changing pfp manually (from either `steal` or `jump` command) will also change `bot.variables_last_link` variable
-- Reloading pfp.py cog will no longer duplicate `@task.loop` tasks
+- Reloading `pfp` cog will no longer duplicate `@task.loop` tasks
 
 ## Notes
+If `!!!steal` returns error like `this command is only for bot account`, try changing [line 51](https://github.com/Tris07/discord-avatar-cycle/blob/master/cogs/pfp.py#L51) into
+```
+                u = self.bot.get_user(int(u))
+```
+
 If the bot doesn't change avatar, that's probably because you hit the ratelimit or url is invalid
 
 For whatever reason, user accounts are required to use password, bot accounts doesn't require password though
