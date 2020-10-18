@@ -64,7 +64,7 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 - Added new command `!!!steal`/`!!!copy`
 - Changing pfp manually (from either `steal` or `jump` command) will also change `bot.variables_last_link` variable
 - Reloading `pfp` cog will no longer duplicate `@task.loop` tasks
-- Whenever you failed to change avatar (due to ratelimit or smthing), `bot.variables_last_link` will not change
+- Whenever you failed to change avatar (due to ratelimit or something), `bot.variables_last_link` will not change
 
 ## Notes
 If `!!!steal` returns error like `this command is only for bot account`, try changing [line 51](https://github.com/Tris07/discord-avatar-cycle/blob/master/cogs/pfp.py#L51) into
