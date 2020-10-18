@@ -28,8 +28,8 @@ Or free ones like [heroku](https://www.heroku.com/), [repl.it](https://repl.it/)
 There also [repl.it project](https://repl.it/@Tris07/Avatar-cycle), all you have to do is set up [.env](https://docs.repl.it/repls/secret-keys) to store your credentials.
 It should look like this:
 ```
-TOKEN=<your_token>
-PASSWORD=<your_password>
+TOKEN=your_token
+PASSWORD=your_password
 ```
 
 ## Features
@@ -63,7 +63,7 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 ### 18 October 2020
 - Added new command `!!!steal`/`!!!copy`
 - Changing pfp manually (from either `steal` or `jump` command) will also change `bot.variables_last_link` variable
-- Reloading pfp.py cog will no longer duplicate `@task.loop`
+- Reloading pfp.py cog will no longer duplicate `@task.loop` tasks
 
 ## Notes
 If the bot doesn't change avatar, that's probably because you hit the ratelimit or url is invalid
