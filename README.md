@@ -53,10 +53,17 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 | list | list / avatars | Show list of all links inside pfp.json | !!!list |
 | remove | remove / rem / r  | Remove a specific url inside json by using their index number shown on 'list' command. Accepts `l`/`latest` as an argumet, also accepts bulk delete | !!!remove \<index1\> \<index2\> ... |
 | skip | skip / next | Change your avatar, this command  will either cycle or picks random depending on your config | !!!skip |
+| steal | steal / copy | Copy someone else pfp and make it yours. You can also steal someone else avatar outside server by using their user ID | !!!steal \<username\|user ID\>
 | help | N/A | Display the defualt help command, you can also get a help from specific command | !!!help \[command_name\]
 > Values in \<\> are required
 
 > Values in \[\] are optional
+
+# Changelogs
+### 18 October 2020
+- Added new command `!!!steal`/`!!!copy`
+- Changing pfp manually (from either `steal` or `jump` command) will also change `bot.variables_last_link` variable
+- Reloading pfp.py cog will no longer duplicate `@task.loop`
 
 ## Notes
 If the bot doesn't change avatar, that's probably because you hit the ratelimit or url is invalid
