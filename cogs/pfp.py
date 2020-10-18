@@ -16,6 +16,48 @@ class avatar_rotator(cog):
         self.pfp_rotator.start()
         print("pfp.py has been loaded")
 
+    def cog_unload(self):
+        self.pfp_rotator.cancel()
+
+    @cmd(aliases=['copy'])
+    async def steal(self, ctx, u: str = None):
+        """
+        Copy someone else pfp and make it yours. You can also steal someone else avatar outside server by using their user ID
+
+        This command is case sensitive. If you mistyped one case letter, this will return error
+        """
+        def get_password():
+            with open('config/password', 'r') as f:
+                password = f.readline()
+
+            return password
+
+        if not u:
+            return await ctx.send("No target, try use username or user ID")
+			
+        # This will check if you're using either user ID or by their username/nickname
+        regex = re.match(r"[0-9]{18}", u)
+        
+        if not regex:
+            # Try search member by using either username, or nickname otherwise return error NotFound
+            try:
+                u = await commands.MemberConverter().convert(ctx, u)
+            except commands.BadArgument:
+                return await ctx.send("member not found")
+        else:
+            try:
+                u = await self.bot.fetch_user(int(u))
+            except discord.NotFound:
+                return await ctx.send("user not found, perhaps you're using wrong ID?")
+        
+        async with aiohttp.ClientSession() as cs: 
+            async with cs.get(str(u.avatar_url)) as r:
+                av = await r.read()
+                await self.bot.user.edit(avatar=av, password=get_password())
+                self.bot.variables_last_link = av
+
+        await ctx.message.add_reaction('☑️')
+
     @cmd(aliases=['setting', 'settings'])
     async def config(self, ctx: commands.Context, option,  *, setting):
         """
@@ -162,6 +204,7 @@ class avatar_rotator(cog):
                 async with cs.get(avatar) as r:
                     av = await r.read()
                     await self.bot.user.edit(avatar=av, password=get_password())
+                    self.bot.variables_last_link = av
             await ctx.send('☑️')
         except Exception as e:
             # this will raise if url is not an image or you're hitting the ratelimit
@@ -340,6 +383,7 @@ class avatar_rotator(cog):
                 except IndexError:
                     index = 0
 
+            # to ensure dupe avatar will not be used
             while self.bot.variables_last_link == av:
                 try:
                     index += 1
@@ -347,7 +391,6 @@ class avatar_rotator(cog):
                 except IndexError:
                     index = 0
 
-            self.bot.variables_last_link = av
             self.bot.variables_index = index
 
             return av
@@ -359,7 +402,6 @@ class avatar_rotator(cog):
             while self.bot.variables_last_link == av:
                 av = random.choice(links)
 
-            self.bot.variables_last_link = av
 
             return av
 
@@ -382,6 +424,7 @@ class avatar_rotator(cog):
                     av = await r.read()
                     # password is required for user accounts for whatever reason, unnecessary for bot accounts
                     await self.bot.user.edit(avatar=av, password=get_password())
+                    self.bot.variables_last_link = av
         except Exception as e:
             # this will usually raised when url is invalid, config/pfp json get messed up, or when you're hitting the ratelimit
             print(e)
