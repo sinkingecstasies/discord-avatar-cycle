@@ -23,6 +23,8 @@ class avatar_rotator(cog):
     async def steal(self, ctx, u: str = None):
         """
         Copy someone else pfp and make it yours. You can also steal someone else avatar outside server by using their user ID
+	
+	You can use either their username#discrim, username, or nickname. You must be in same server as the target in for this to work
 
         This command is case sensitive. If you mistyped one case letter, this will return error
         """
