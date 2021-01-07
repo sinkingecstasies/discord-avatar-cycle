@@ -7,8 +7,12 @@ import random
 import asyncio
 import aiohttp
 import re
-import humanize
 import datetime as dt
+
+try:
+    import humanize
+except ImportError:
+    humanize = None
 
 class avatar_rotator(cog):
     def __init__(self, bot):
@@ -164,8 +168,11 @@ class avatar_rotator(cog):
                 await ctx.send("you can't set interval at 0 second")
                 return
 
-            delta = dt.timedelta(seconds=seconds)
-            await ctx.send(f"successfully changed interval to {humanize.precisedelta(delta)}")
+            if humanize:
+                delta = dt.timedelta(seconds=seconds)
+                await ctx.send(f"successfully changed interval to {humanize.precisedelta(delta)}")
+            else:
+                await ctx.send(f"successfully changed interval")
         else:
             await ctx.send("There is no such option, available options: `cycle` `interval`")
 
