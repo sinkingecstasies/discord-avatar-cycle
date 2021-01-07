@@ -23,8 +23,8 @@ class avatar_rotator(cog):
     async def steal(self, ctx, u: str = None):
         """
         Copy someone else pfp and make it yours. You can also steal someone else avatar outside server by using their user ID
-	
-	You can use either their username#discrim, username, or nickname. You must be in same server as the target in for this to work
+
+        You can use either their username#discrim, username, or nickname. You must be in same server as the target in for this to work. Using user ID is more recommended
 
         This command is case sensitive. If you mistyped one case letter, this will return error
         """
@@ -174,10 +174,68 @@ class avatar_rotator(cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send(error)
 
+    @commands.command(aliases=['av', 'pfp'])
+    async def avatar(self, ctx, *, target = ""):
+        """Obtain someone else avatar in maximum resolution, also works if user didn't share mutual servers with the bot but ID is required for this to work
+        For mass avatar, use multiple IDs, separate by space
+        """
+        def to_jpg(user):
+            url = user.avatar_url_as(format="jpg", size=4096)
+            return url
+
+        def to_png(user):
+            url = user.avatar_url_as(format="png", size=4096)
+            return url
+
+        def to_webp(user):
+            url = user.avatar_url_as(format="webp", size=4096)
+            return url
+
+        def to_gif(user):
+            if user.is_avatar_animated() == True:
+                url = user.avatar_url_as(format="gif", size=4096)
+                text = f"   |   [GIF]({url})"
+                return text
+            else:
+                not_animated = ""
+                return not_animated
+
+        def to_default(user):
+            url = user.avatar_url_as(size=4096)
+            return url
+
+        try:
+            tempvalue = target.replace(" ", "")
+            if target == "":
+                embed = discord.Embed(color=discord.Color.green(), title=f"{ctx.author.name}#{ctx.author.discriminator}'s avatar", description=(f'[JPG]({to_jpg(ctx.author)})   |   [PNG]({to_png(ctx.author)})   |   [WebP]({to_webp(ctx.author)}){to_gif(ctx.author)}')) 
+
+                embed.set_image(url=to_default(ctx.author))
+                await ctx.send(embed=embed)
+
+            elif tempvalue.isdigit() == False: # if not using ID, search from get_user
+                target_member = await commands.MemberConverter().convert(ctx, target) # convert it into user either based on mention, name, or name#discrim
+
+                embed = discord.Embed(color=discord.Color.green(), title=f"{target_member.name}#{target_member.discriminator}'s avatar", description=(f'[JPG]({to_jpg(target_member)})   |   [PNG]({to_png(target_member)})   |   [WebP]({to_webp(target_member)}){to_gif(target_member)}')) 
+
+                embed.set_image(url=to_default(target_member))
+                await ctx.send(embed=embed)
+
+            elif tempvalue.isdigit() == True: # if using ID, use fetch_user
+                target = target.split(" ")
+                for each in target:
+                    target_user = await self.bot.fetch_user(each)
+
+                    embed = discord.Embed(color=discord.Color.green(), title=f"{target_user.name}#{target_user.discriminator}'s avatar", description=(f'[JPG]({to_jpg(target_user)})   |   [PNG]({to_png(target_user)})   |   [WebP]({to_webp(target_user)}){to_gif(target_user)}')) 
+
+                    embed.set_image(url=to_default(target_user))
+                    await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(e)
+
     @cmd(aliases=['next'])
     async def skip(self, ctx: commands.Context):
         """
-        Change your avatar, this command  will either cycle or picks random avatar depending on your config
+        Change your avatar, this command will either cycle or picks random avatar depending on your config
         """
         await self.rotator()
         await ctx.message.add_reaction('☑️')
@@ -199,7 +257,7 @@ class avatar_rotator(cog):
         try:
             avatar = pfp['links'][index - 1]
         except IndexError:
-            await ctx.send("index out of range")
+            return await ctx.send("index out of range")
 
         try:
             async with aiohttp.ClientSession() as cs: 
@@ -209,7 +267,7 @@ class avatar_rotator(cog):
                     self.bot.variables_last_link = av
             await ctx.send('☑️')
         except Exception as e:
-            # this will raise if url is not an image or you're hitting the ratelimit
+            # this will raise if url is not an image or when you're hitting the ratelimit
             await ctx.send(e)
     
     @jump.error
@@ -219,25 +277,38 @@ class avatar_rotator(cog):
         if isinstance(error, commands.BadArgument):
             await ctx.send("index should be an integer")
 
-    @cmd(aliases=['avatars'])
-    async def list(self, ctx: commands.Context):
+    @cmd(aliases=['avatars', 'links', 'link'])
+    async def list(self, ctx: commands.Context, page_number: int = 1):
         """
         Show list of all links inside pfp.json
         """
-            
         counter = 1
-        msg = ""
 
         with open("config/pfp.json", 'r') as f:
             pfp = json.load(f)
 
         links = pfp["links"]
 
+        p = commands.Paginator(prefix='', suffix='')
+
         for link in links:
-            msg += str(counter) + ". " + link + "\n"
+            p.add_line(line=f"{str(counter)}. {link}")
             counter += 1
 
-        embed = discord.Embed(color=ctx.author.color, title='List of links', description=msg)
+        pages = p.pages
+        total_pages = len(pages)
+
+        if page_number <= 0:
+            page_number = 1
+            offset = 0
+        elif page_number > total_pages:
+            page_number = total_pages
+            offset = -1
+        else:
+            offset = page_number - 1
+
+        embed = discord.Embed(color=ctx.author.color, title='List of links', description=pages[offset])
+        embed.set_footer(text=f"Page {page_number}/{total_pages}")
 
         await ctx.send(embed=embed)
 
@@ -404,7 +475,6 @@ class avatar_rotator(cog):
             while self.bot.variables_last_link == av:
                 av = random.choice(links)
 
-
             return av
 
         try:
@@ -418,7 +488,7 @@ class avatar_rotator(cog):
             if cycle == "cycle":
                 avatar = get_cycle_avatar(links)
 
-            elif cycle == "random":
+            else:
                 avatar = get_random_avatar(links)
 
             async with aiohttp.ClientSession() as cs: 
