@@ -14,7 +14,7 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 - [humanize](https://pypi.org/project/humanize/) (optional)
 
 # Setup
-- All you have to do is just set up configuration files inside config folder, you need to put your token, password, avatar links and you're good to go
+- All you have to do is just set up configuration files inside config folder, you need to put your token, password. You can add avatar links by directly edit it or add them later afterwards
 - Run main.py. You can use any IDE, or run straight from command prompt by doing `python main.py` at the current folder
 
 # Hosting
@@ -45,7 +45,7 @@ It will cycle avatar by ascending order
 Default prefix is `!!!`, you can change it on main.py into whatever you like
 | Command name | Alias | Description | Usage |
 | ------ | ------ | ------ | ------ |
-| avatar | avatar / av / pfp | Get user avatar in maximum resolution | !!!av \<user ID\>
+| avatar | avatar / av / pfp | Get user avatar in maximum resolution, able to fetch avatar even if you're not mutual server by using ID | !!!av \<user ID\>
 | append | append / add | Appends an anther avatar into json, please use direct image url only. Accepts bulk links, separate them by space | !!!append \<link1\> \<link2\> ... |
 | config | config / setting / settings | Changes configuration files. Available options are config and interval, config setting only accepts either `cycle` or `random`, interval only accepts time format in 0d0h0m0s, for example: 1d6h for  1 day and 6 hours | !!!config \<cycle\|interval\> \<setting\> |
 | jump | jump / jumpto / skipto | Change avatar to specified index on list | !!!jump \<index\> |
@@ -65,7 +65,7 @@ Default prefix is `!!!`, you can change it on main.py into whatever you like
 - Reloading `pfp` cog will no longer duplicate `@task.loop` tasks
 - Whenever you failed to change avatar (due to ratelimit or something), `bot.variables_last_link` will not change
 
-### 8 Januaru 2021
+### 8 January 2021
 - Added new command `!!!avatar`
 - Added paginator to `list` and some new aliases
 - Small fixes
