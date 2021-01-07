@@ -14,7 +14,7 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 - [humanize](https://pypi.org/project/humanize/) (optional)
 
 # Setup
-- All you have to do is just set up configuration files inside config folder, you need to put your token, password. You can add avatar links by directly edit it or add them later afterwards
+- All you have to do is just set up configuration files inside config folder, you need to put your token, password. You can add avatar links by directly edit them or add them later afterwards
 - Run main.py. You can use any IDE, or run straight from command prompt by doing `python main.py` at the current folder
 
 # Hosting
