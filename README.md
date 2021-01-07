@@ -38,7 +38,7 @@ PASSWORD=your_password
 ### Random
 It will randomly picks avatar inside config
 
-### cycle
+### Cycle
 It will cycle avatar by ascending order
 
 # Commands
