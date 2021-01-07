@@ -11,7 +11,7 @@ This was written on python 3.8.2 64 bit using [discord.py](https://github.com/Ra
 ## Requirements
 - [python](https://www.python.org/) 3.6+
 - [discord.py](https://github.com/Rapptz/discord.py)
-- [humanize](https://pypi.org/project/humanize/), not really necesarry, it's only used to convert interval seconds into human readable time and nothing else
+- [humanize](https://pypi.org/project/humanize/) (optional)
 
 # Setup
 - All you have to do is just set up configuration files inside config folder, you need to put your token, password, avatar links and you're good to go
