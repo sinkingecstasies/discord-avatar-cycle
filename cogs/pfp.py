@@ -174,7 +174,7 @@ class avatar_rotator(cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send(error)
 
-    @commands.command(aliases=['av', 'pfp'])
+    @cmd(aliases=['av', 'pfp'])
     async def avatar(self, ctx, *, target = ""):
         """Obtain someone else avatar in maximum resolution, also works if user didn't share mutual servers with the bot but ID is required for this to work
         For mass avatar, use multiple IDs, separate by space
